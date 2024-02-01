@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments :: head">
+    <title>Home</title>
+</head>
+
+<body>
+
+
+<div class="columns">
+    <div class="column"></div>
+
+    <div class="column is-half">
+
+        <header th:replace="fragments :: header"></header>
+
+        <div id="stats-box" class="box">
+            <div class="level">
+                <div>
+                    <h2>Your statistics</h2>
+                    <p>Total runs: <span th:text="${totalRuns}"></span></p>
+                    <p>Total drops: <span th:text="${totalDrops}"></span></p>
+                    <p>Drop/Run ratio: <span th:text="${runDropRatio}"></span></p>
+                    <p>Failed runs rate: <span th:text="${failedRunRate}"></span></p>
+                    <p>Most frequent dungeon: <span th:text="${mostDungeon}">None</span></p>
+                    <p>Most used character: <span th:text="${mostChar}">None</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${hasChar}">
+            <div class="box">
+                <div id="char-selection">
+                    <form id="char-selection-form" method="post" th:action="@{/character}">
+                        <div class="select">
+                            <select name="charName">
+                                <option>
+                                    <span>Select character</span>
+                                </option>
+                                <option th:each="char : ${usersCharacters}"  onclick="submitForm()">
+                                    <span th:text="${char.charName()}" th:value="${char.charName()}"></span>
+                                </option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div th:unless="${hasChar}" class="notification is-warning">
+            <p>You have no characters <span th:text="${loggedUser}">Max Mustermann</span>, <a href="/character">create one!</a></p>
+        </div>
+
+        <br>
+
+        <div th:if="${hasRunned}">
+            <div id="recent-runs" class="box">
+                <table class="table table-is-stripped is-hoverable is-fullwidth">
+                    <thead>
+                    <tr>
+                        <th>Character</th>
+                        <th><abbr title="Key Level">K</abbr></th>
+                        <th>Dungeon</th>
+                        <th><abbr title="Drop">D</abbr></th>
+                        <th><abbr title="Gearscore">GS</abbr></th>
+                        <th><abbr title="Finished in minutes">Fin</abbr></th>
+                        <th>Cleared</th>
+                        <th>Date</th>
+                        <th>Option</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="run :${runList}">
+                        <td>
+                            <span th:text="${run.characterName()}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${run.key()}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${run.dungeon()}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${run.drop()}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${run.gearscore()}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${run.finished()}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${run.cleared()}"></span>
+                        </td>
+                        <td>
+                            <span th:text="${run.date()}"></span>
+                        </td>
+                        <td>
+                            <form method="post" th:action="@{'/home/delete'}">
+                                <input type="hidden" th:value="${run.runId}" th:name="runIdToDelete">
+                                <button type="submit" class="delete is-medium"></button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div th:unless="${hasRunned}" class="notification is-warning">
+            <p>No runs recorded yet.</p>
+        </div>
+
+        <footer th:replace="fragments :: footer"></footer>
+
+    </div>
+
+    <div class="column"></div>
+</div>
+
+<script src="/js/char.js"></script>
+</body>
+</html>

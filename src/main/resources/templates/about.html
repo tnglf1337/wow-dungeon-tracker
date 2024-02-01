@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments :: head">
+  <title>About</title>
+</head>
+<body>
+
+<div class="columns">
+  <div class="column"></div>
+
+  <div class="column is-half">
+
+    <header th:replace="fragments :: header"></header>
+
+    <div class="box">
+      <p>WoW Dungeon Tracker is a web app written in Java with the usage of Spring Web and Spring Data JDBC.</p>
+      <p>It uses the framework <a href="https://bulma.io/">Bulma</a> for the design.</p>
+      <p>You can use it the way you like it, if you want to contribute to it, <a>here</a> is the GitHub repository.</p>
+      <p>By Timo Neske, 2024.</p>
+    </div>
+
+    <footer th:replace="fragments :: footer"></footer>
+
+  </div>
+
+  <div class="column"></div>
+</div>
+
+</body>
+</html>

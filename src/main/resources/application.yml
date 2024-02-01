@@ -1,0 +1,21 @@
+logging:
+  level:
+    org:
+      springframework:
+        jdbc.core: trace
+        security: info
+
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${GIT_CLIENT_ID}
+            client-secret: ${GIT_CLIENT_SECRET}
+            scope: read:public_repo
+  datasource:
+    password: ${DATABASE_PW}
+    username: ${DATABASE_USER}
+    url: jdbc:postgresql://localhost:5433/wow

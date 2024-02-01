@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="/static/css/style.css">
+</head>
+<body>
+    <header th:fragment="header">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item">
+                    <img src="/img/wdt_logo.png" width="105" height="80">
+                </a>
+
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" href="/home">
+                        Home
+                    </a>
+                    <a class="navbar-item" href="/detailed">
+                        Detailed stats
+                    </a>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            More
+                        </a>
+
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" href="/about">
+                                About
+                            </a>
+                            <hr class="navbar-divider">
+                            <a class="navbar-item" href="/report">
+                                Report an issue
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <div th:if="${hasChar}">
+                            <a class="button is-info is-inverted is-rounded" href="/insert">+ Run</a>
+                        </div>
+                        <a class="button is-info is-inverted is-rounded" href="/character">+/- Character</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <br>
+    </header>
+
+    <footer th:fragment="footer">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <footer class="footer">
+            <div class="content has-text-centered">
+                <p>
+                    <strong>WoW Dungeon Tracker</strong> by Timo Neske.
+                </p>
+            </div>
+        </footer>
+    </footer>
+</body>
+</html>

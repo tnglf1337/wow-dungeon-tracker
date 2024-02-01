@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments :: head">
+    <title>New character</title>
+</head>
+<body>
+
+
+
+  <div class="columns">
+    <div class="column"></div>
+
+    <div class="column is-half">
+
+      <header th:replace="fragments :: header"></header>
+
+      <div class="box">
+        <form method="post" th:action="@{/new_char}" th:object="${newCharForm}">
+          <div class="field">
+            <label class="label">Name of Character</label>
+              <div class="control">
+                <input class="input" type="text" name="charName">
+                <button type="submit" class="is-rounded button is-link is-small">Add new character</button>
+                <small class="has-text-danger" th:if="${#fields.hasErrors('charName')}" th:errors="*{charName}"></small>
+              </div>
+          </div>
+        </form>
+      </div>
+
+      <br>
+      <div th:if="${hasChar}">
+        <div class="box">
+          <p>Your characters:</p>
+          <table class="table table-is-stripped is-hoverable is-fullwidth">
+            <thead>
+            <tr>
+              <th>Character</th>
+              <th>Option</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="char :${characterList}">
+              <td>
+                <span th:text="${char.charName()}"></span>
+              </td>
+              <td>
+                <form method="post" th:action="@{'/delete_char'}">
+                  <input type="hidden" th:value="${char.characterId()}" th:name="charIdToDelete">
+                  <button type="submit" class="delete is-medium"></button>
+                </form>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div th:unless="${hasChar}" class="notification is-warning">
+        <p>No available characters yet.</a></p>
+      </div>
+
+      <footer th:replace="fragments :: footer"></footer>
+
+    </div>
+
+    <div class="column"></div>
+  </div>
+
+</body>
+</html>
